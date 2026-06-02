@@ -1,0 +1,73 @@
+1.  User Upcoming Events
+Ans.Select u.user_id,e.event_id,e.start_date from Users u join 
+    Registrations r on r.user_id=u.user_id 
+    join Events e on e.event_id=r.event_id and e.status="upcoming" and e.city=u.city order by e.start_date
+2.  Top Rated Events
+Ans.SELECT e.event_id,AVG(f.rating) AS avg_rating,COUNT(*) AS feedback_count FROM Events e
+    JOIN Feedback f ON f.event_id = e.event_id GROUP BY e.event_id HAVING COUNT(*) >= 10
+    ORDER BY avg_rating DESC LIMIT 1;
+3.  Inactive Users
+Ans.Select u.user_id,u.full_name from Users u left join Registrations r
+    on r.user_id=u.user_id  GROUP BY u.user_id,u.full_name HAVING max(r.registration_date) is null or max(r.registration_date)<CURDATE()-Interval 90 Day;
+4.  Peak Session Hours
+Ans.Select count(s.session_id),e.title from Events e join 
+    Sessions s on s.event_id=e.event_id where time(s.start_time)>='10:00:00' and time(s.end_time) <='12:00:00' group by e.title;
+5.  Most Active Cities
+Ans.Select e.city,count(distinct(r.user_id)) as dis_users from Registrations r join Events e on e.event_id=r.event_id group by e.city 
+    order by dis_users desc limit 5;
+6.  Event Resource Summary
+Ans.Select e.event_id,e.title,count(r.resource_id) as res from Resources r join Events e on e.event_id=r.event_id group by e.event_id,e.title;
+7.  Low Feedback Alerts
+Ans.Select u.user_id,u.full_name,f.comments,e.title from Feedback f join Users u on u.user_id=f.user_id join Events e on e.event_id=f.event_id where f.rating <3;
+8.  Sessions per Upcoming Event
+Ans.SELECT e.event_id,e.title,COUNT(s.session_id) AS session_count FROM Events e LEFT JOIN Sessions s
+    ON s.event_id = e.event_id WHERE e.status = 'upcoming' GROUP BY e.event_id, e.title;
+9.  Organizer Event Summary
+Ans.Select e.Organizer_id,count(e.event_id),e.status from Events e group by e.Organizer_id,e.status;
+10. Feedback Gap
+Ans.Select distinct e.event_id, e.title from Events e join Registrations r on r.event_id=e.event_id left join Feedback f on f.event_id=e.event_id where f.feedback_id is null;
+11. Daily New User Count
+Ans.SELECT registration_date,COUNT(user_id) AS user_count FROM Users
+    WHERE registration_date >= CURDATE() - INTERVAL 7 DAY GROUP BY registration_date
+    ORDER BY registration_date;
+12. Event with Maximum Sessions
+Ans.SELECT e.event_id,e.title,COUNT(s.session_id) AS session_count
+    FROM Events e JOIN Sessions s ON s.event_id = e.event_id GROUP BY e.event_id, e.title
+    HAVING COUNT(s.session_id) = (SELECT MAX(session_count) FROM ( SELECT COUNT(session_id) AS session_count
+    FROM Sessions GROUP BY event_id));
+13. Average Rating per City
+Ans.SELECT e.city, AVG(f.rating) AS avg_rating FROM Events e
+    JOIN Feedback f ON f.event_id = e.event_id GROUP BY e.city;
+14. Most Registered Events
+Ans.SELECT e.event_id,e.title,COUNT(r.registration_id) AS total_registrations
+    FROM Events e JOIN Registrations r ON r.event_id = e.event_id GROUP BY e.event_id, e.title
+    ORDER BY total_registrations DESC LIMIT 3;
+15.Event Session Time Conflict
+Ans.SELECT s1.event_id,s1.session_id AS session1,s2.session_id AS session2
+    FROM Sessions s1 JOIN Sessions s2 ON s1.event_id = s2.event_id AND s1.session_id < s2.session_id
+    AND s1.start_time < s2.end_time AND s1.end_time > s2.start_time;
+16. Unregistered Active Users
+Ans.Select e.event_id,e.full_name from Events e left join Registrations r
+    on r.event_id= e.event_id and r.registration_date>= CURDATE() - Interval 30 days where r.registration_id is null;
+17.  Multi-Session Speakers 
+Ans.Select s.Speaker_name from Sessions s group by s.Speaker_name having count(s.session_id) >1;
+18.  Resource Availability Check
+Ans.Select e.event_id,e.title from Events e left join Resources r on r.event_id=e.event_id where r.resource_id is null;
+19. Completed Events with Feedback Summary
+Ans.Select e.title,count(r.registration_id),avg(f.rating) from Events e join Registrations r on r.event_id=e.event_id join f.event_id on f.event_id=e.event_id group by e.title;
+20. User Engagement Index 
+Ans.Select u.full_name,count(distinct e.event_id),count(distinctf.feedback_id) from Users u join Events e on e.user_id=u.user_id join Feedback f on f.user_id=u.user_id group by u.full_name;
+21. Top Feedback Providers 
+Ans.Select u.user_id,u.full_name,count(f.feedback_id) from Users u join Feedback f on f.user_id=u.user_id group by u.user_id,u.full_name order by count(f.feedback_id) desc limit 5;
+22. Duplicate Registrations Check
+Ans.Select u.full_name,e.title,e.event_id count(r.registration_id) from Users u join Events e on e.user_id=u.user_id join Registrations r 
+    on r.event_id=e.event_id group by u.full_name,e.title,e.event_id having count(r.registration_id)>1;
+23. Registration Trends 
+Ans.SELECT DATE_FORMAT(registration_date, '%Y-%m') AS month,COUNT(registration_id) AS total_registrations
+    FROM Registrations WHERE registration_date >= CURDATE() - INTERVAL 12 MONTH GROUP BY DATE_FORMAT(registration_date, '%Y-%m')
+    ORDER BY month;
+24.Average Session Duration per Event
+Ans.SELECT e.event_id,e.title,AVG(TIMESTAMPDIFF(MINUTE,s.start_time,s.end_time)) AS avg_duration_minutes
+FROM Events e JOIN Sessions s ON s.event_id = e.event_id GROUP BY e.event_id, e.title;
+25. Events Without Sessions
+Ans.Select e.event_id,e.title from Events e left join Sessions s on s.event_id=e.event_id where s.session_id is null;
