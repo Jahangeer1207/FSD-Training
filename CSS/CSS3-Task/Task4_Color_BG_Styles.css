@@ -1,0 +1,14 @@
+body {
+    background-color: #d3d3d3;
+    background-image: url('events.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #333333;
+}
+
+h2 {
+    background: linear-gradient(to right, #ff0000, #ffa500);
+    color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 5px;
+}

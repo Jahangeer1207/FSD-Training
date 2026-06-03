@@ -1,0 +1,29 @@
+/* universal selector */
+* {
+    color: blue;
+    font-size: 18px;
+}
+h2 {
+    color: orange;
+    font-size: 22px;
+    font-family: 'Times New Roman', serif;
+}
+/*id selector */
+#main-heading {
+    color: red;
+    font-size: 24px;
+    font-weight: bold;
+
+}
+/*class selector */
+.eventCard {
+    background-color: lightblue;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+}
+h3 p{
+    color: purple;
+    font-size: 20px;
+}

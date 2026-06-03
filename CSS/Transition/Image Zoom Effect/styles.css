@@ -1,0 +1,17 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+img{
+    width: 300px;
+    height: 200px;
+    border-radius: 8px;
+    align-items: center;
+}
+img:hover {
+    transform: scale(1.2);
+    transition: all 0.5s ease;
+}

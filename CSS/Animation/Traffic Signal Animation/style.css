@@ -1,0 +1,72 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background:white;
+}
+
+/* Signal box */
+.signal {
+  width: 120px;
+  height: 320px;
+  background: #111;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Light style */
+.light {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #333;
+  opacity: 0.3;
+}
+
+/* Red light animation */
+.red {
+  animation: redLight 6s infinite;
+}
+
+/* Yellow light animation */
+.yellow {
+  animation: yellowLight 6s infinite;
+}
+
+/* Green light animation */
+.green {
+  animation: greenLight 6s infinite;
+}
+
+/* KEYFRAMES */
+
+/* Red ON first 2 seconds */
+@keyframes redLight {
+  0%   { background: red; opacity: 1; }
+  33%  { background: red; opacity: 1; }
+  34%  { background: #333; opacity: 0.3; }
+  100% { background: #333; opacity: 0.3; }
+}
+
+/* Yellow ON next 2 seconds */
+@keyframes yellowLight {
+  0%   { background: #333; opacity: 0.3; }
+  33%  { background: #333; opacity: 0.3; }
+  34%  { background: yellow; opacity: 1; }
+  66%  { background: yellow; opacity: 1; }
+  67%  { background: #333; opacity: 0.3; }
+  100% { background: #333; opacity: 0.3; }
+}
+
+/* Green ON last 2 seconds */
+@keyframes greenLight {
+  0%   { background: #333; opacity: 0.3; }
+  66%  { background: #333; opacity: 0.3; }
+  67%  { background: green; opacity: 1; }
+  100% { background: green; opacity: 1; }
+}
