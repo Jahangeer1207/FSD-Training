@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootstrap Gradient Background</title>
+    <title>Margin and Padding Utilities</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -12,21 +12,25 @@
 
 <body>
 
-    <div class="container mt-5">
+    <div class="container">
 
-        <div class="p-5 bg-dark bg-gradient text-white rounded text-center">
+        
+        <div class="bg-primary text-white p-2 m-3">
+            <h2>Header Section</h2>
+            <p>This section uses p-2 and m-3.</p>
+        </div>
 
-            <h1>Bootstrap Gradient Background</h1>
-
-            <p class="lead">
-                This section uses <code>bg-dark</code>,
-                <code>bg-gradient</code>, and white text.
+       
+        <div class="bg-light border mt-4 py-5">
+            <h3 class="text-center">Content Section</h3>
+            <p class="text-center">
+                This section uses mt-4 and py-5 spacing utilities.
             </p>
+        </div>
 
-            <button class="btn btn-light">
-                Learn More
-            </button>
-
+        
+        <div class="bg-dark text-white p-2 mt-4 text-center">
+            Footer Section
         </div>
 
     </div>
