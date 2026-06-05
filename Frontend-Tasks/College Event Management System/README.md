@@ -132,37 +132,6 @@ Store all screenshots inside the `screenshots` folder.
 
 ---
 
-## Installation
-
-### Clone Repository
-
-```bash
-git clone https://github.com/your-username/college-event-management.git
-```
-
-### Open Project
-
-Open the project folder and run:
-
-```text
-index.html
-```
-
-in any modern web browser.
-
----
-
-## Event Categories
-
-* Technical Quiz
-* Hackathon
-* Poster Presentation
-* Coding Contest
-* Project Expo
-* Cultural Fest
-
----
-
 ## Coordinator Details
 
 **Faculty Coordinator:** Dr. Ramesh Kumar
