@@ -113,7 +113,7 @@ Online-Course-Registration-Portal/
 
 ## Author
 
-Mohammad Jahangeer
+Md Jahangeer
 
 B.Tech Student
 
