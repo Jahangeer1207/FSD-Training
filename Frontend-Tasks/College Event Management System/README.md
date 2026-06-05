@@ -171,31 +171,8 @@ in any modern web browser.
 
 **Email:** [events@cvr.ac.in](mailto:events@cvr.ac.in)
 
-**Phone:** +91 9876543210
+**Phone:** +91 987654321
 
----
-
-## GitHub Commit History
-
-### Commit 1
-
-Initial project setup
-
-### Commit 2
-
-Added Home Page and Events Page
-
-### Commit 3
-
-Added Registration and Schedule Pages
-
-### Commit 4
-
-Added Gallery and FAQ Pages
-
-### Commit 5
-
-Completed Contact Page and Documentation
 
 ---
 
@@ -210,19 +187,9 @@ Completed Contact Page and Documentation
 
 ---
 
-## GitHub Repository Link
-
-Add your repository link here:
-
-```text
-https://github.com/YOUR_USERNAME/college-event-management
-```
-
----
-
 ## Author
 
-Mohammad Jahangeer
+Md Jahangeer
 
 B.Tech Student
 
