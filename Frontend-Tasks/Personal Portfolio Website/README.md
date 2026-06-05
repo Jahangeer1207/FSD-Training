@@ -93,8 +93,6 @@ Portfolio/
 
 │ └── script.js
 
-├── images/
-
 │ ├── profile.jpg
 
 │ └── resume.pdf
