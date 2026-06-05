@@ -1,0 +1,189 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Navbar */
+.navbar-brand{
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.nav-link{
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-link:hover{
+    color: #ffd700 !important;
+}
+
+/* Hero Carousel */
+.hero-img{
+    height: 600px;
+    object-fit: cover;
+}
+
+.carousel-caption{
+    background: rgba(0,0,0,0.5);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.carousel-caption h1{
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.carousel-caption p{
+    font-size: 1.2rem;
+}
+
+/* Cards */
+.card{
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.card:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+}
+
+.card img{
+    height: 220px;
+    object-fit: cover;
+}
+
+.card-title{
+    font-weight: 600;
+}
+
+/* Buttons */
+.btn{
+    border-radius: 8px;
+}
+
+.btn-primary{
+    background-color: #0d6efd;
+}
+
+.btn-primary:hover{
+    transform: scale(1.03);
+}
+
+.btn-success:hover{
+    transform: scale(1.03);
+}
+
+/* Sections */
+section{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Testimonials */
+.bg-light .card{
+    border-left: 4px solid #0d6efd;
+}
+
+/* Forms */
+.form-control,
+.form-select{
+    border-radius: 8px;
+}
+
+.form-control:focus,
+.form-select:focus{
+    box-shadow: 0 0 10px rgba(13,110,253,0.3);
+}
+
+/* Alerts */
+.alert{
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+/* Faculty Cards */
+.card-text{
+    color: #555;
+}
+
+/* Statistics Section */
+.bg-primary h2{
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+/* Footer */
+footer{
+    margin-top: 30px;
+}
+
+footer a{
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+footer a:hover{
+    color: #ffd700 !important;
+}
+
+/* Map Image */
+.card img.img-fluid{
+    border-radius: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px){
+
+    .hero-img{
+        height: 350px;
+    }
+
+    .carousel-caption h1{
+        font-size: 1.8rem;
+    }
+
+    .carousel-caption p{
+        font-size: 1rem;
+    }
+
+    .card img{
+        height: 180px;
+    }
+
+    .navbar-brand{
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 576px){
+
+    .hero-img{
+        height: 250px;
+    }
+
+    .carousel-caption{
+        padding: 10px;
+    }
+
+    .carousel-caption h1{
+        font-size: 1.4rem;
+    }
+
+    .carousel-caption p{
+        font-size: 0.9rem;
+    }
+}
