@@ -95,23 +95,9 @@ Online-Course-Registration-Portal/
 
 │ └── script.js
 
-├── screenshots/
+├── output/
 
 └── README.md
-
----
-
-## Screenshots
-
-Add screenshots of:
-
-1. Home Page
-2. Courses Page
-3. Registration Page
-4. About Us Page
-5. Contact Us Page
-
-Store all screenshots inside the `screenshots` folder.
 
 ---
 
