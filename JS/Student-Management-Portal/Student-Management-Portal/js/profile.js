@@ -1,108 +1,90 @@
-/* ==========================================
-   CVR College of Engineering
-   Student Profile JS
-========================================== */
+const params = new URLSearchParams(window.location.search);
 
-// ================================
-// SESSION PROTECTION
-// ================================
+const studentId = Number(params.get("id"));
 
-const isLoggedIn =
-    sessionStorage.getItem("loggedIn");
+const students = JSON.parse(localStorage.getItem("students")) || [];
 
-if (isLoggedIn !== "true") {
+const student = students.find((s) => s.id === studentId);
 
-    alert("Please login first to access profile.");
+if (student) {
+  document.getElementById("profilePhoto").src = student.photo;
 
-    window.location.href = "index.html";
+  document.getElementById("name").innerText = student.name;
 
-}
+  document.getElementById("roll").innerText = student.roll;
 
-// ================================
-// GET CURRENT STUDENT
-// ================================
+  document.getElementById("email").innerText = student.email;
 
-const student =
-    JSON.parse(
-        sessionStorage.getItem("currentStudent")
-    );
+  document.getElementById("mobile").innerText = student.mobile;
 
-// If no student found
-if (!student) {
+  document.getElementById("gender").innerText = student.gender;
 
-    alert("Session expired. Please login again.");
+  document.getElementById("branch").innerText = student.branch;
 
-    window.location.href = "index.html";
+  document.getElementById("dob").innerText = student.dob;
 
-}
+  document.getElementById("attendance").innerHTML =
+    student.attendance === "Present"
+      ? '<span class="badge bg-success">Present</span>'
+      : '<span class="badge bg-danger">Absent</span>';
 
-// ================================
-// FILL PROFILE DATA
-// ================================
+  document.getElementById("placement").innerHTML =
+    student.placement === "Placed"
+      ? '<span class="badge bg-primary">Placed</span>'
+      : '<span class="badge bg-secondary">Not Placed</span>';
 
-document.getElementById("profileName").textContent =
-    student.fullName || "N/A";
+  document.getElementById("address").innerText = student.address;
 
-document.getElementById("profileRoll").textContent =
-    student.rollNumber || "N/A";
+  document.getElementById("idPhoto").src = student.photo;
 
-document.getElementById("profileBranch").textContent =
-    student.branch || "N/A";
+  document.getElementById("idName").innerText = student.name;
 
-document.getElementById("profileEmail").textContent =
-    student.email || "N/A";
+  document.getElementById("idRoll").innerText = student.roll;
 
-document.getElementById("profileMobile").textContent =
-    student.mobile || "N/A";
-
-document.getElementById("profileDOB").textContent =
-    student.dob || "N/A";
-
-document.getElementById("profileAddress").textContent =
-    student.address || "N/A";
-
-// ================================
-// ID CARD DATA
-// ================================
-
-document.getElementById("idName").textContent =
-    student.fullName || "N/A";
-
-document.getElementById("idRoll").textContent =
-    student.rollNumber || "N/A";
-
-document.getElementById("idBranch").textContent =
-    student.branch || "N/A";
-
-// ================================
-// PROFILE IMAGE HANDLING
-// ================================
-
-const profileImg =
-    document.getElementById("profileImage");
-
-const idImg =
-    document.getElementById("idImage");
-
-// If user uploaded photo exists
-if (student.photo && student.photo !== "") {
-
-    profileImg.src = student.photo;
-    idImg.src = student.photo;
-
+  document.getElementById("idBranch").innerText = student.branch;
 } else {
-
-    // fallback image
-    profileImg.src = "https://i.pravatar.cc/400";
-    idImg.src = "https://i.pravatar.cc/120";
-
+  document.body.innerHTML = `
+<div class="container py-5">
+<div class="alert alert-danger">
+Student Not Found
+</div>
+</div>
+`;
 }
 
-// ================================
-// OPTIONAL LOG
-// ================================
+function printIDCard() {
+  const content = document.getElementById("idCard").innerHTML;
 
-console.log(
-    "Profile loaded for:",
-    student.fullName
-);
+  const printWindow = window.open("", "", "width=600,height=600");
+
+  printWindow.document.write(`
+
+<html>
+
+<head>
+
+<title>ID Card</title>
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+</head>
+
+<body class="p-4">
+
+<div class="card border-primary">
+
+${content}
+
+</div>
+
+</body>
+
+</html>
+
+`);
+
+  printWindow.document.close();
+
+  printWindow.print();
+}

@@ -1,146 +1,177 @@
-/* ==========================================
-   CVR College - Student Dashboard CRUD
-========================================== */
-
 let students = JSON.parse(localStorage.getItem("students")) || [];
 
-// ================= LOAD TABLE =================
-function loadStudents(data = students) {
+const table = document.getElementById("studentTable");
 
-    const table = document.getElementById("studentTable");
-    table.innerHTML = "";
+// Check Login
 
-    data.forEach((s, index) => {
+const isLoggedIn = localStorage.getItem("isLoggedIn");
 
-        table.innerHTML += `
-        <tr>
-            <td>${s.rollNumber}</td>
-            <td>${s.fullName}</td>
-            <td>${s.branch}</td>
-            <td>${s.email}</td>
-            <td>${s.attendance}%</td>
+if (isLoggedIn !== "true") {
+  alert("Please login first!");
 
-            <td>
-                <button class="btn btn-info btn-sm" onclick="viewStudent(${index})">View</button>
-                <button class="btn btn-warning btn-sm" onclick="editStudent(${index})">Edit</button>
-                <button class="btn btn-danger btn-sm" onclick="deleteStudent(${index})">Delete</button>
-            </td>
-        </tr>
-        `;
-    });
-
-    document.getElementById("totalStudents").innerText = students.length;
+  window.location.href = "login.html";
 }
 
-loadStudents();
+function loadDashboard() {
+  table.innerHTML = "";
 
-// ================= SAVE STUDENT =================
+  let present = 0;
+  let absent = 0;
+  let placed = 0;
+
+  students.forEach((student) => {
+    if (student.attendance === "Present") present++;
+
+    if (student.attendance === "Absent") absent++;
+
+    if (student.placement === "Placed") placed++;
+
+    table.innerHTML += `
+
+<tr>
+
+<td>
+<img src="${student.photo}"
+width="60"
+height="60"
+class="rounded-circle">
+</td>
+
+<td>${student.roll}</td>
+
+<td>${student.name}</td>
+
+<td>${student.branch}</td>
+
+<td>
+
+<span class="badge ${
+      student.attendance === "Present" ? "bg-success" : "bg-danger"
+    }">
+
+${student.attendance}
+
+</span>
+
+</td>
+
+<td>
+
+<span class="badge ${
+      student.placement === "Placed" ? "bg-primary" : "bg-secondary"
+    }">
+
+${student.placement}
+
+</span>
+
+</td>
+
+<td>
+
+<a href="profile.html?id=${student.id}"
+class="btn btn-info btn-sm">
+
+View
+
+</a>
+
+<button
+class="btn btn-warning btn-sm"
+onclick="editStudent(${student.id})">
+
+Edit
+
+</button>
+
+<button
+class="btn btn-danger btn-sm"
+onclick="deleteStudent(${student.id})">
+
+Delete
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+  });
+
+  document.getElementById("totalStudents").innerText = students.length;
+
+  document.getElementById("presentStudents").innerText = present;
+
+  document.getElementById("absentStudents").innerText = absent;
+
+  document.getElementById("placements").innerText = placed;
+}
+
+loadDashboard();
+
+function deleteStudent(id) {
+  if (confirm("Delete Student?")) {
+    students = students.filter((student) => student.id !== id);
+
+    localStorage.setItem("students", JSON.stringify(students));
+
+    loadDashboard();
+  }
+}
+
+function editStudent(id) {
+  const student = students.find((student) => student.id === id);
+
+  document.getElementById("editId").value = student.id;
+
+  document.getElementById("editName").value = student.name;
+
+  document.getElementById("editEmail").value = student.email;
+
+  document.getElementById("editBranch").value = student.branch;
+
+  document.getElementById("editAttendance").value = student.attendance;
+
+  const modal = new bootstrap.Modal(document.getElementById("editModal"));
+
+  modal.show();
+}
+
 function saveStudent() {
+  const id = Number(document.getElementById("editId").value);
 
-    const name = document.getElementById("addName").value;
-    const roll = document.getElementById("addRoll").value;
-    const branch = document.getElementById("addBranch").value;
-    const email = document.getElementById("addEmail").value;
-    const attendance = document.getElementById("addAttendance").value;
+  const student = students.find((student) => student.id === id);
 
-    if (!name || !roll) {
-        alert("Name and Roll Number are required!");
-        return;
-    }
+  student.name = document.getElementById("editName").value;
 
-    const student = {
-        fullName: name,
-        rollNumber: roll,
-        branch: branch,
-        email: email,
-        attendance: attendance || 0
-    };
+  student.email = document.getElementById("editEmail").value;
 
-    let students = JSON.parse(localStorage.getItem("students")) || [];
-    students.push(student);
+  student.branch = document.getElementById("editBranch").value;
 
-    localStorage.setItem("students", JSON.stringify(students));
+  student.attendance = document.getElementById("editAttendance").value;
 
-    // FORCE CLOSE MODAL (SAFE METHOD)
-    const modalElement = document.getElementById("addStudentModal");
-    const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
-    modal.hide();
+  localStorage.setItem("students", JSON.stringify(students));
 
-    // RESET FORM
-    document.getElementById("addName").value = "";
-    document.getElementById("addRoll").value = "";
-    document.getElementById("addBranch").value = "";
-    document.getElementById("addEmail").value = "";
-    document.getElementById("addAttendance").value = "";
+  loadDashboard();
 
-    loadStudents();
-
-    alert("Student Added Successfully!");
-}
-// ================= VIEW =================
-function viewStudent(index) {
-
-    const s = students[index];
-
-    alert(
-        `STUDENT DETAILS\n\n` +
-        `Name: ${s.fullName}\n` +
-        `Roll: ${s.rollNumber}\n` +
-        `Branch: ${s.branch}\n` +
-        `Email: ${s.email}\n` +
-        `Attendance: ${s.attendance}%`
-    );
+  bootstrap.Modal.getInstance(document.getElementById("editModal")).hide();
 }
 
-// ================= EDIT =================
-function editStudent(index) {
+document.getElementById("search").addEventListener("keyup", function () {
+  const value = this.value.toLowerCase();
 
-    const s = students[index];
+  const rows = document.querySelectorAll("#studentTable tr");
 
-    const name = prompt("Edit Name", s.fullName);
-    const branch = prompt("Edit Branch", s.branch);
-    const email = prompt("Edit Email", s.email);
-    const attendance = prompt("Edit Attendance", s.attendance);
-
-    students[index] = {
-        ...s,
-        fullName: name,
-        branch: branch,
-        email: email,
-        attendance: attendance
-    };
-
-    localStorage.setItem("students", JSON.stringify(students));
-
-    loadStudents();
-
-    alert("Student Updated!");
-}
-
-// ================= DELETE =================
-function deleteStudent(index) {
-
-    if (!confirm("Are you sure you want to delete?")) return;
-
-    students.splice(index, 1);
-
-    localStorage.setItem("students", JSON.stringify(students));
-
-    loadStudents();
-
-    alert("Student Deleted!");
-}
-
-// ================= SEARCH =================
-document.getElementById("searchInput").addEventListener("keyup", function () {
-
-    const value = this.value.toLowerCase();
-
-    const filtered = students.filter(s =>
-        s.fullName.toLowerCase().includes(value) ||
-        s.rollNumber.toLowerCase().includes(value) ||
-        s.branch.toLowerCase().includes(value)
-    );
-
-    loadStudents(filtered);
+  rows.forEach((row) => {
+    row.style.display = row.innerText.toLowerCase().includes(value)
+      ? ""
+      : "none";
+  });
 });
+
+function logout() {
+  localStorage.removeItem("isLoggedIn");
+
+  window.location.href = "login.html";
+}

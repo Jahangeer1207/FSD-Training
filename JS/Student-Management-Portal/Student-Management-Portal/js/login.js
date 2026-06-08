@@ -1,136 +1,27 @@
+document
+  .getElementById("studentLoginForm")
+  .addEventListener("submit", function (e) {
+    e.preventDefault();
 
-/* ==========================================
-   CVR College of Engineering
-   Student Login JS
-========================================== */
+    const roll = document.getElementById("roll").value;
 
-// -----------------------------
-// Login Button
-// -----------------------------
+    const password = document.getElementById("password").value;
 
-const loginButton =
-    document.getElementById("loginButton");
+    const students = JSON.parse(localStorage.getItem("students")) || [];
 
-if (loginButton) {
-
-    loginButton.addEventListener("click", () => {
-
-        const email =
-            document.getElementById("loginEmail")
-            .value
-            .trim()
-            .toLowerCase();
-
-        const password =
-            document.getElementById("loginPassword")
-            .value;
-
-        // Validation
-
-        if (!email || !password) {
-
-            alert(
-                "Please enter email and password."
-            );
-
-            return;
-        }
-
-        // Get students
-
-        const students =
-            JSON.parse(
-                localStorage.getItem("students")
-            ) || [];
-
-        // No registration found
-
-        if (students.length === 0) {
-
-            alert(
-                "No registered students found. Please register first."
-            );
-
-            return;
-        }
-
-        // Find matching student
-
-        const currentStudent =
-            students.find(student =>
-
-                student.email === email &&
-                student.password === password
-
-            );
-
-        // Login Success
-
-        if (currentStudent) {
-
-            sessionStorage.setItem(
-                "loggedIn",
-                "true"
-            );
-
-            sessionStorage.setItem(
-                "currentStudent",
-                JSON.stringify(currentStudent)
-            );
-
-            alert(
-                `Welcome ${currentStudent.fullName}`
-            );
-
-            window.location.href =
-                "dashboard.html";
-
-        }
-
-        // Login Failed
-
-        else {
-
-            alert(
-                "Invalid Email or Password"
-            );
-
-        }
-
-    });
-
-}
-
-
-// -----------------------------
-// Utility Function
-// -----------------------------
-
-function isLoggedIn() {
-
-    return (
-        sessionStorage.getItem("loggedIn")
-        === "true"
+    const student = students.find(
+      (s) => s.roll === roll && s.password === password,
     );
 
-}
+    if (student) {
+      localStorage.setItem("loggedStudent", student.id);
 
-
-// -----------------------------
-// Redirect If Already Logged In
-// -----------------------------
-
-if (
-    window.location.pathname.includes("index.html")
-) {
-
-    if (isLoggedIn()) {
-
-        console.log(
-            "User already logged in"
-        );
-
+      window.location.href = "profile.html?id=" + student.id;
+    } else {
+      document.getElementById("msg").innerHTML = `
+<div class="alert alert-danger">
+Invalid Roll Number or Password
+</div>
+`;
     }
-
-}
-
+  });
