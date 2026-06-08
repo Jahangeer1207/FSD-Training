@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile | CVR College of Engineering</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-light">
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+
+        <a class="navbar-brand fw-bold" href="index.html">
+            🎓 CVR College Portal
+        </a>
+
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="register.html">Register</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="dashboard.html">Dashboard</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="profile.html">Profile</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact</a>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<!-- ================= PROFILE SECTION ================= -->
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-6">
+
+            <div class="card shadow">
+
+                <!-- Profile Image -->
+                <img id="profileImage"
+                     src="https://i.pravatar.cc/400"
+                     class="card-img-top"
+                     alt="Profile">
+
+                <div class="card-body text-center">
+
+                    <h3 id="profileName" class="card-title">
+                        Student Name
+                    </h3>
+
+                    <span class="badge bg-success mb-3">
+                        Active Student
+                    </span>
+
+                    <hr>
+
+                    <div class="text-start">
+
+                        <p><strong>Roll Number:</strong>
+                            <span id="profileRoll"></span>
+                        </p>
+
+                        <p><strong>Branch:</strong>
+                            <span id="profileBranch"></span>
+                        </p>
+
+                        <p><strong>Email:</strong>
+                            <span id="profileEmail"></span>
+                        </p>
+
+                        <p><strong>Mobile:</strong>
+                            <span id="profileMobile"></span>
+                        </p>
+
+                        <p><strong>Date of Birth:</strong>
+                            <span id="profileDOB"></span>
+                        </p>
+
+                        <p><strong>Address:</strong>
+                            <span id="profileAddress"></span>
+                        </p>
+
+                    </div>
+
+                    <hr>
+
+                    <!-- Buttons -->
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+
+                        <button class="btn btn-primary">
+                            Edit Profile
+                        </button>
+
+                        <button class="btn btn-success">
+                            Download ID Card
+                        </button>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ================= ID CARD ================= -->
+
+    <div class="row justify-content-center mt-5">
+
+        <div class="col-md-4">
+
+            <div class="card border-primary shadow">
+
+                <div class="card-header bg-primary text-white text-center">
+                    Student ID Card
+                </div>
+
+                <div class="card-body text-center">
+
+                    <img id="idImage"
+                         src="https://i.pravatar.cc/120"
+                         class="rounded-circle mb-3"
+                         alt="Student">
+
+                    <h5 id="idName">Student Name</h5>
+
+                    <p><strong>Roll No:</strong>
+                        <span id="idRoll"></span>
+                    </p>
+
+                    <p><strong>Branch:</strong>
+                        <span id="idBranch"></span>
+                    </p>
+
+                    <p>
+                        <strong>Status:</strong>
+                        <span class="badge bg-success">
+                            Active
+                        </span>
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="bg-dark text-white text-center py-3 mt-5">
+    © 2026 CVR College of Engineering
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Profile JS -->
+<script src="js/profile.js"></script>
+
+</body>
+</html>
