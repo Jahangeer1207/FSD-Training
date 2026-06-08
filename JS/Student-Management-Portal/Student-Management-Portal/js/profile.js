@@ -5,6 +5,9 @@ const studentId = Number(params.get("id"));
 const students = JSON.parse(localStorage.getItem("students")) || [];
 
 const student = students.find((s) => s.id === studentId);
+if (localStorage.getItem("studentLoggedIn") !== "true") {
+  window.location.href = "login.html";
+}
 
 if (student) {
   document.getElementById("profilePhoto").src = student.photo;
@@ -87,4 +90,10 @@ ${content}
   printWindow.document.close();
 
   printWindow.print();
+}
+function studentLogout() {
+  localStorage.removeItem("studentLoggedIn");
+  localStorage.removeItem("loggedStudent");
+
+  window.location.href = "student-login.html";
 }
