@@ -1,0 +1,66 @@
+body {
+  transition: 0.3s;
+}
+
+.hero {
+  background: linear-gradient(135deg, #0d6efd, #0dcaf0);
+  color: white;
+  padding: 100px 20px;
+}
+
+.carousel-img {
+  height: 500px;
+  object-fit: cover;
+}
+
+.card {
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+footer a {
+  text-decoration: none;
+}
+
+.dark-mode {
+  background: #121212;
+  color: white;
+}
+
+.dark-mode .card {
+  background: #1e1e1e;
+  color: white;
+}
+
+.dark-mode .navbar {
+  background: #000 !important;
+}
+
+.dark-mode footer {
+  background: #000 !important;
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .carousel-img {
+    height: 250px;
+  }
+}
+.card {
+  border-radius: 15px;
+}
+
+.form-control,
+.form-select {
+  border-radius: 10px;
+}
+
+.card-header {
+  font-weight: bold;
+}

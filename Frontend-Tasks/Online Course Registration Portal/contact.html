@@ -82,7 +82,7 @@
 
                         <div class="mb-3">
                             <label class="form-label">Full Name</label>
-                            <input type="text"
+                            <input type="text"  id="contactName"
                                    class="form-control"
                                    placeholder="Enter your name"
                                    required>
@@ -90,7 +90,7 @@
 
                         <div class="mb-3">
                             <label class="form-label">Email Address</label>
-                            <input type="email"
+                            <input type="email"  id="contactEmail"
                                    class="form-control"
                                    placeholder="Enter your email"
                                    required>
@@ -98,7 +98,7 @@
 
                         <div class="mb-3">
                             <label class="form-label">Subject</label>
-                            <input type="text"
+                            <input type="text" id="subject"
                                    class="form-control"
                                    placeholder="Enter subject"
                                    required>
@@ -106,7 +106,7 @@
 
                         <div class="mb-3">
                             <label class="form-label">Message</label>
-                            <textarea class="form-control"
+                            <textarea class="form-control"id="message"
                                       rows="5"
                                       placeholder="Type your message..."
                                       required></textarea>
@@ -213,14 +213,50 @@
 
 <!-- Contact Form Script -->
 <script>
-document.getElementById("contactForm").addEventListener("submit", function(event){
+document.getElementById("contactForm")
+.addEventListener("submit", function(e){
 
-    event.preventDefault();
+    e.preventDefault();
 
-    document.getElementById("contactAlert").classList.remove("d-none");
+    let name =
+        document.getElementById("contactName").value.trim();
+
+    let email =
+        document.getElementById("contactEmail").value.trim();
+
+    let subject =
+        document.getElementById("subject").value.trim();
+
+    let message =
+        document.getElementById("message").value.trim();
+
+    if(name.length < 3){
+        alert("Please enter valid name");
+        return;
+    }
+
+    let emailPattern =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if(!emailPattern.test(email)){
+        alert("Please enter valid email");
+        return;
+    }
+
+    if(subject.length < 3){
+        alert("Please enter subject");
+        return;
+    }
+
+    if(message.length < 10){
+        alert("Message must be at least 10 characters");
+        return;
+    }
+
+    document.getElementById("contactAlert")
+            .classList.remove("d-none");
 
     this.reset();
-
 });
 </script>
 

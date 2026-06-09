@@ -311,29 +311,38 @@
 
     <h2 class="text-center mb-4">Contact Me</h2>
 
-    <form>
+    <form id="contactForm">
 
-        <input type="text"
-               class="form-control mb-3"
-               placeholder="Name">
+    <input type="text"
+           id="name"
+           class="form-control mb-3"
+           placeholder="Name">
 
-        <input type="email"
-               class="form-control mb-3"
-               placeholder="Email">
+    <input type="email"
+           id="email"
+           class="form-control mb-3"
+           placeholder="Email">
 
-        <input type="text"
-               class="form-control mb-3"
-               placeholder="Subject">
+    <input type="text"
+           id="subject"
+           class="form-control mb-3"
+           placeholder="Subject">
 
-        <textarea class="form-control mb-3"
-                  rows="5"
-                  placeholder="Message"></textarea>
+    <textarea id="message"
+              class="form-control mb-3"
+              rows="5"
+              placeholder="Message"></textarea>
 
-        <button class="btn btn-success">
-            Send Message
-        </button>
+    <button type="submit" class="btn btn-success">
+        Send Message
+    </button>
 
-    </form>
+</form>
+
+<div id="successAlert"
+     class="alert alert-success mt-3 d-none">
+     Message Sent Successfully!
+</div>
 
 </section>
 
