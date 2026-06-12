@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System - Add Student</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="add_students.html">Add Student</a>
+        <a href="view_students.html">View Students</a>
+        <a href="logout.html">Logout</a>
+    </nav>
+    <!--Name,Age,Roll no,Grade-->
+    <h1>Add Student</h1>
+    <form action="view_students.html" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br><br>
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required>
+        <br><br>
+        <label for="roll_no">Roll no:</label>
+        <input type="text" id="roll_no" name="roll_no" required>
+        <br><br>
+        <label for="grade">Grade:</label>
+        <input type="text" id="grade" name="grade" required>
+        <br><br>
+        <input type="submit" value="Add Student" onclick="add(event)">
+    </form>
+</body>
+<script>
+    async function add(event){
+
+        event.preventDefault();
+
+        const studentobject = {
+            name: document.getElementById("name").value,
+            age: document.getElementById("age").value,
+            roll_no: document.getElementById("roll_no").value,
+            grade: document.getElementById("grade").value,
+        };
+
+        const response = await fetch('http://localhost:3000/students');
+        const students = await response.json();
+
+        if (students.some(student => student.roll_no === studentobject.roll_no)){
+            alert("Roll number already exists!");
+            return false;
+        }
+
+        fetch('http://localhost:3000/students', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(studentobject)
+        });
+
+        alert("Student added successfully!");
+        window.location.href = "view_students.html";
+    }
+</script>
+</html>

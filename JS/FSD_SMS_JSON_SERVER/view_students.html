@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System - View Students</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="add_students.html">Add Student</a>
+        <a href="view_students.html">View Students</a>
+        <a href="logout.html">Logout</a>
+    </nav>
+    <h1>View Students</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Roll No</th>
+                <th>Grade</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+</body>
+<script>
+    async function fetchStudents() {
+        const response = await fetch('http://localhost:3000/students');
+        const students = await response.json();
+        renderStudents(students);
+    }
+
+    const tbody = document.querySelector("tbody");
+    function renderStudents(students) {
+        tbody.innerHTML = "";
+        students.forEach((student, index) => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td>${student.name}</td>
+                <td>${student.age}</td>
+                <td>${student.roll_no}</td>
+                <td>${student.grade}</td>
+                <td>
+                    <a href="edit_students.html?roll_no=${student.roll_no}">Edit</a>
+                    <br>
+                    <a href="#" onclick="deleteStudent(${index})">Delete</a>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+    async function deleteStudent(index) {
+        if (confirm("Are you sure you want to delete this student?")) {
+            const students = await fetchStudents();
+            await fetch(`http://localhost:3000/students/${students[index].id}`, {
+                method: 'DELETE'
+            });
+            renderStudents(students);
+        }
+    }
+    fetchStudents();
+</script>
+</html>

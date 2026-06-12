@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System - Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+    </nav>
+    <h1>Login</h1>
+    <form action="dashboard.html" method="post" onsubmit="return validate()">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br><br>
+        <input type="submit" value="Login">
+    </form>
+    <p>Don't have an account? <a href="register.html">Register here</a></p>
+</body>
+<script>
+    async function validate(){
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        
+        if (username && password) {
+            const users = await fetch('http://localhost:3000/users');
+            const usersArray = await users.json();
+            var user = usersArray.find(u => u.username === username);
+            
+            if (user && user.username === username && user.password === password) {
+                alert("Login successful!");
+                return true;
+            } else {
+                alert("Invalid username or password!");
+                return false;
+            }
+        } else {
+            alert("Please fill in all fields!");
+            return false;
+        }
+    }
+</script>
+</html>

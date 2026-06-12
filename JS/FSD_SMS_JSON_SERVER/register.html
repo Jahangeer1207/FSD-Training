@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System - Register</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+    </nav>
+    <h1>Register</h1>
+    <form onsubmit="validate(); return false">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br><br>
+        <label for="confirm_password">Confirm Password:</label>
+        <input type="password" id="confirm_password" name="confirm_password" required>
+        <br><br>
+        <input type="submit" value="Register">
+    </form>
+    <p>Already have an account? <a href="login.html">Login here</a></p>
+</body>
+<script>
+    async function validate(){
+        var password = document.getElementById("password").value;
+         if(!password.match(/^[A-Za-z0-9!@#$%^&*()_]{6,}$/)){
+            alert("Password must be at least 6 characters long and can contain letters, numbers and special characters!");
+            return false;
+        }
+        var confirm_password = document.getElementById("confirm_password").value;
+        if(password != confirm_password){
+            alert("Passwords do not match!");
+            return false;
+        }
+        const users=await fetch('http://localhost:3000/users')
+        const usersArray= await users.json();
+        const userobject = {
+            username: document.getElementById("username").value,
+            password: document.getElementById("password").value,
+        };
+        if (usersArray.some(user => user.username === userobject.username)){
+            alert("Username already exists!");
+            return false;
+        }
+        await fetch('http://localhost:3000/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userobject)
+        });
+        alert("Registration successful!");
+        window.location.href = "login.html";
+    }
+</script>
+</html>
