@@ -1,0 +1,60 @@
+{
+  "courses": [
+    {
+      "id": "1",
+      "name": "Web Development",
+      "duration": "6 Months",
+      "fee": 15000,
+      "image": "images/web.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Python Programming",
+      "duration": "4 Months",
+      "fee": 12000,
+      "image": "images/python.jpg"
+    },
+    {
+      "id": "3",
+      "name": "Data Science",
+      "duration": "8 Months",
+      "fee": 25000,
+      "image": "images/datascience.jpg"
+    },
+    {
+      "id": "4",
+      "name": "AI & Machine Learning",
+      "duration": "9 Months",
+      "fee": 30000,
+      "image": "images/ai.jpg"
+    },
+    {
+      "id": "5",
+      "name": "Java Programming",
+      "duration": "5 Months",
+      "fee": 14000,
+      "image": "images/java.jpg"
+    },
+    {
+      "id": "6",
+      "name": "Cloud Computing",
+      "duration": "6 Months",
+      "fee": 20000,
+      "image": "images/cloud.jpg"
+    }
+  ],
+  "registrations": [
+    {
+      "studentName": "Md Jahangeer",
+      "email": "mj@gmail.com",
+      "mobile": "8019828462",
+      "gender": "Male",
+      "course": "Web Development",
+      "qualification": "B.tech",
+      "address": "18-103",
+      "resume": ".python_history",
+      "id": "Oll35ILi4_k"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
