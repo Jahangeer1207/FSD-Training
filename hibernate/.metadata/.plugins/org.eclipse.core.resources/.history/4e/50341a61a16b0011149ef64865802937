@@ -1,0 +1,10 @@
+package cq.student;
+
+import jakarta.persistence.*;
+
+@Entity
+public class Student {
+
+	@Id
+	
+}

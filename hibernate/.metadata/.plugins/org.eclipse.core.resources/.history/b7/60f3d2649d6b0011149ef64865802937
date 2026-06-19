@@ -1,0 +1,6 @@
+package cq.student;
+
+@Entity
+public class Student {
+
+}

@@ -1,0 +1,90 @@
+package cq.student;
+
+import java.util.List;
+import java.util.Scanner;
+
+public class App {
+
+    public static void main(String[] args) {
+
+        studentDAO dao = new studentDAO();
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("\n===== STUDENT MENU =====");
+            System.out.println("1. Insert Student");
+            System.out.println("2. View All Students");
+            System.out.println("3. Update Student");
+            System.out.println("4. Delete Student");
+            System.out.println("5. Exit");
+            System.out.print("Enter choice: ");
+
+            int choice = sc.nextInt();
+
+            switch (choice) {
+
+                case 1:
+                    sc.nextLine();
+                    System.out.print("Name: ");
+                    String name = sc.nextLine();
+                    System.out.print("Email: ");
+                    String email = sc.nextLine();
+                    System.out.print("Course: ");
+                    String course = sc.nextLine();
+                    System.out.print("Age: ");
+                    int age = sc.nextInt();
+
+                    dao.saveStudent(new Student(name, email, course, age));
+                    System.out.println("Student saved!");
+                    break;
+
+                case 2:
+                    List<Student> list = dao.getAllStudents();
+                    list.forEach(System.out::println);
+                    break;
+
+                case 3:
+                    System.out.print("Enter ID to update: ");
+                    int uid = sc.nextInt();
+
+                    Student s = dao.getStudent(uid);
+                    if (s == null) {
+                        System.out.println("Student not found");
+                        break;
+                    }
+
+                    sc.nextLine();
+                    System.out.print("New name: ");
+                    s.setStudentName(sc.nextLine());
+
+                    System.out.print("New email: ");
+                    s.setEmail(sc.nextLine());
+
+                    System.out.print("New course: ");
+                    s.setCourse(sc.nextLine());
+
+                    System.out.print("New age: ");
+                    s.setAge(sc.nextInt());
+
+                    dao.updateStudent(s);
+                    System.out.println("Updated!");
+                    break;
+
+                case 4:
+                    System.out.print("Enter ID to delete: ");
+                    int did = sc.nextInt();
+                    dao.deleteStudent(did);
+                    System.out.println("Deleted!");
+                    break;
+
+                case 5:
+                    System.out.println("Exit...");
+                    sc.close();
+                    System.exit(0);
+
+                default:
+                    System.out.println("Invalid choice!");
+            }
+        }
+    }
+}

@@ -1,0 +1,55 @@
+package cq.student;
+
+import jakarta.persistence.*;
+
+@Entity
+public class Student {
+
+	@Id
+	private int studentId;
+	private String studentName;
+	private String email;
+	private String course;
+	private int age;
+	
+	 public Studnet() {
+	    }
+
+	    public Student(String name, String email, String course, int age) {
+	        this.studentName = name;
+	        this.email = email;
+	        this.course=course;
+	        this.age=age;
+	        
+	    }
+
+	 
+	    public int getId() {
+	        return studentId;
+	    }
+
+	    public void setId(int id) {
+	        this.studentId = id;
+	    }
+
+	    public String getName() {
+	        return studentName;
+	    }
+
+	    public void setName(String name) {
+	        this.studentName = name;
+	    }
+
+	    public String getEmail() {
+	        return email;
+	    }
+
+	    public void setEmail(String email) {
+	        this.email = email;
+	    }
+
+	    @Override
+	    public String toString() {
+	        return "Student name:"+studentName+"\nEmail:"+email+"\ncourse:"+course+"\nage:"+age;
+	    }
+}

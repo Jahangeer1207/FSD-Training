@@ -1,0 +1,125 @@
+package com.example.productdemo;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "product")
+public class Product {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  // DB auto-generates the id
+    private int id;
+
+    private String name;
+
+    private double price;
+
+    // Hibernate needs a no-argument constructor
+    public Product() {
+    }
+
+    public Product(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    // Getters and Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Product [id=" + id + ", name=" + name + ", price=" + price + "]";
+    }
+}
+
+---
+ProductDAO.java
+
+package rohit.rohitkumar;
+
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+public class ProductDAO {
+
+    // Built once and reused for the whole application
+    private static final SessionFactory factory =
+            new Configuration().configure().buildSessionFactory();
+
+    // CREATE
+    public void saveProduct(Product product) {
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.persist(product);
+        tx.commit();
+        session.close();
+    }
+
+    // READ ALL
+    public List<Product> getAllProducts() {
+        Session session = factory.openSession();
+        List<Product> products =
+                session.createQuery("FROM Product", Product.class).list();
+        session.close();
+        return products;
+    }
+
+    // READ ONE (used by update)
+    public Product getProduct(int id) {
+        Session session = factory.openSession();
+        Product product = session.get(Product.class, id);
+        session.close();
+        return product;
+    }
+
+    // UPDATE
+    public void updateProduct(Product product) {
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.merge(product);
+        tx.commit();
+        session.close();
+    }
+
+    // DELETE
+    public void deleteProduct(int id) {
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        Product product = session.get(Product.class, id);
+        if (product != null) {
+            session.remove(product);
+        }
+        tx.commit();
+        session.close();
+    }
+}
