@@ -1,0 +1,23 @@
+body {
+  background: #f5f5f5;
+}
+
+.card {
+  border-radius: 12px;
+}
+
+.hero {
+  background: linear-gradient(
+    135deg,
+    #0d6efd,
+    #0dcaf0
+  );
+
+  color: white;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.table img {
+  object-fit: cover;
+}
